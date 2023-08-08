@@ -33,7 +33,7 @@ def recommend_products():
     ]
     return products
 
-
+'''대출 계산기'''
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
