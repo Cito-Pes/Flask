@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF 합치기</title>
+</head>
+<body>
+    <h1>PDF 합치기</h1>
+    <form action="/merge" method="POST" enctype="multipart/form-data">
+        <input type="file" name="pdf_files" id="pdf_files" multiple style="display: none;">
+        <button type="button" onclick="selectFiles()">파일 선택</button>
+        <br>
+        <label for="pdf_filename">파일 이름:</label>
+        <input type="text" name="pdf_filename" id="pdf_filename">
+        <br>
+        <input type="submit" value="합치기">
+    </form>
+
+    <script>
+        function selectFiles() {
+            document.getElementById("pdf_files").click();
+        }
+    </script>
+</body>
+</html>
