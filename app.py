@@ -1,5 +1,10 @@
+#-*-coding:utf-8-*-
+
 import math
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, request, render_template, send_file,  redirect, url_for
+from PyPDF2 import PdfFileMerger
+from PyPDF2 import PdfMerger
+
 
 app = Flask(__name__)
 
@@ -58,6 +63,34 @@ def result():
     return render_template("index.html", schedule=amortization_schedule, products=recommended_products,
                            principal=principal, interest_rate=interest_rate, time=time)
 
+
+@app.route('/PDF')
+def Merge_PDF():
+    return render_template('./PDF/Merge_PDF.html')
+
+@app.route('/PDF/merge', methods=['POST'])
+def merge_pdf():
+    print("merge_pdf")
+    files = request.files.getlist('pdf_files')
+    filename = request.form['pdf_filename']
+    print(files)
+
+    # merger = PdfFileMerger()
+    merger = PdfMerger()
+
+    for file in files:
+        merger.append(file)
+
+    merged_file_path = f'{filename}.pdf' if filename else 'merged.pdf'
+    merger.write(merged_file_path)
+    merger.close()
+
+    return render_template('./PDF/Merge_PDF_Down.html', filename=merged_file_path)
+
+
+@app.route('/download/<filename>')
+def download_pdf(filename):
+    return send_file(filename, as_attachment=True)
 
 if __name__ == "__main__":
     app.run(debug=True)

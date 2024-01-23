@@ -4,10 +4,10 @@ from PyPDF2 import PdfFileMerger
 app = Flask(__name__)
 
 
-@app.route('/PDF')
+@app.route('/')
 def index():
-    # return render_template('./PDF/Merge_PDF.html')
-    return render_template('./PDF/index.html')
+    return render_template('./PDF/Merge_PDF.html')
+    # return render_template('index.html')
 
 
 @app.route('/', methods=['POST'])
