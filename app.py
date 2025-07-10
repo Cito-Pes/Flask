@@ -39,7 +39,7 @@ def recommend_products():
     return products
 
 '''대출 계산기'''
-@app.route("/", methods=["GET", "POST"])
+@app.route("/lone/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
         principal = request.form["principal"]
@@ -51,7 +51,7 @@ def index():
     recommended_products = recommend_products()
     return render_template("index.html", products=recommended_products)
 
-@app.route("/result", methods=["GET"])
+@app.route("/lone/result", methods=["GET"])
 def result():
     principal = float(request.args.get("principal"))
     interest_rate = float(request.args.get("interest_rate"))
